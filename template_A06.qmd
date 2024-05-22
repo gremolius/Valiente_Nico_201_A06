@@ -48,7 +48,7 @@ To get full credit for this Question you must:
 ::: {.callout-tip icon="false"}
 ## Github Repo Link
 
-[https://your-github-rep](https://your-github-repo-url)
+<https://github.com/gremolius/Valiente_Nico_201_A06>
 
 ```         
 ```
@@ -59,7 +59,7 @@ To get full credit for this Question you must:
 ::: {.callout-tip icon="false"}
 ## Screenshot/image of RStudio
 
-![](filepath.png)
+![](github_setup.png)
 :::
 
 ## Question 2 (8 points)
@@ -102,7 +102,9 @@ Extract the value `8162` (LeBron James points) in 2 different ways:
 -   using names
 
 ```{r}
+player_info[[2]][[4]]
 
+player_info$LJ$points
 ```
 
 ### Part b (3 points)
@@ -112,7 +114,17 @@ Add a new named element to the end of each player's list called `height`. The he
 Print the `player_info` list to prove you were successful.
 
 ```{r}
+heights <- c(78, 81, 78, 86, 85)
 
+
+index <- 1
+
+for (i in names(player_info)) {
+  player_info[[i]]$height <- heights[index]
+  index <- index + 1
+}
+
+player_info
 ```
 
 ### Part c (3 points)
@@ -130,7 +142,13 @@ Hint: initialize an empty list
 Note: this must still run correctly even if the values were to change or if another player were added to the list or if the player order changed.
 
 ```{r}
+points_per_game <- list()
 
+for (i in names(player_info)){
+  points_per_game[[i]] <- player_info[[i]]$points / player_info[[i]]$games_played
+}
+
+points_per_game
 ```
 
 ### Part d (1 point)
@@ -140,7 +158,9 @@ Use the list created in Part c and an appropriate apply function to round each v
 Store the output as a vector and print the results.
 
 ```{r}
+points_per_game <- sapply(points_per_game, function(x) round(x, 2))
 
+points_per_game
 ```
 
 ## Question 3 (3 points)
