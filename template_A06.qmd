@@ -216,7 +216,8 @@ max_temps <- read_tsv("state_max_temps.tsv") |>
 Calculate the average temperature for each month across the whole data frame (using the data for all three states together).
 
 ```{r}
-
+col_means <- max_temps %>% 
+  summarize(across(c(jan:dec), mean))
 ```
 
 ### Part b (2 points)
@@ -230,7 +231,14 @@ Create three new data frames by slicing the data by state.
 No need to print any output here.
 
 ```{r}
+colorado <- max_temps %>%
+  slice(1:126)
 
+virginia <- max_temps %>%
+  slice(253:378)
+
+ohio <- max_temps %>%
+  slice(127:252)
 ```
 
 ### Part c (5 points)
@@ -250,7 +258,15 @@ Example (this is NOT the answer just an example of what goes in the {}):
 Note: This code should still run successfully even if the numbers were to change.
 
 ```{r}
+colorado_median <- colorado %>% 
+  group_by(year) %>%
+  summarize(median = median(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec))
 
+max_median_year <- colorado_median$year[which.max(colorado_median$median)]
+min_median_year <- colorado_median$year[which.min(colorado_median$median)]
+
+max_median_year
+min_median_year
 ```
 
 ## Question 5 (5 points)
