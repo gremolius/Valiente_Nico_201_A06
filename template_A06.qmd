@@ -51,9 +51,8 @@ To get full credit for this Question you must:
 <https://github.com/gremolius/Valiente_Nico_201_A06>
 
 ```         
+https://github.com/gremolius/Valiente_Nico_201_A06
 ```
-
-[o-url](https://your-github-repo-url)
 :::
 
 ::: {.callout-tip icon="false"}
@@ -260,13 +259,15 @@ Note: This code should still run successfully even if the numbers were to change
 ```{r}
 colorado_median <- colorado %>% 
   group_by(year) %>%
-  summarize(median = median(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec))
+  summarize(median = median(c_across(jan:dec)))
 
 max_median_year <- colorado_median$year[which.max(colorado_median$median)]
 min_median_year <- colorado_median$year[which.min(colorado_median$median)]
 
-max_median_year
-min_median_year
+max_median <- colorado_median$median[which.max(colorado_median$median)]
+min_median <- colorado_median$median[which.min(colorado_median$median)]
+
+print(paste0("The maximum median annual temperature of ", max_median, " occurred in ", max_median_year,  " and the minimum median annual temperature of ", min_median, " occurred in ", min_median_year, "."))
 ```
 
 ## Question 5 (5 points)
